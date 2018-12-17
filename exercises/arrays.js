@@ -200,3 +200,172 @@
 // console.log(getMaxSubSum([1, 2, 3]));
 
 // Exercise 23
+// Добавить класс в строку
+// В объекте есть свойство className, которое содержит список «классов» – слов, разделенных пробелом:
+// var obj = {
+//   className: 'open menu'
+// }
+// Создайте функцию addClass(obj, cls), которая добавляет в список класс cls, но только если его там еще нет:
+// addClass(obj, 'new'); // obj.className='open menu new'
+// addClass(obj, 'open'); // без изменений (класс уже существует)
+// addClass(obj, 'me'); // obj.className='open menu new me'
+// alert( obj.className ); // "open menu new me"
+// P.S. Ваша функция не должна добавлять лишних пробелов.
+
+// function addClass(obj, cls) {
+//   var arr = [];
+//   if (obj.className){
+//     arr = obj.className.split(" ");
+//   }
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i] === cls) {
+//       return;
+//     }
+//   }
+//   arr.push(cls);
+//   obj.className = arr.join(" ");
+// }
+// var obj = {
+//   className: '' //open menu
+// }
+// addClass(obj, 'new'); // obj.className='open menu new'
+// addClass(obj, 'open'); // без изменений (класс уже существует)
+// addClass(obj, 'me'); // obj.className='open menu new me'
+// console.log(obj.className);
+
+// Exercise 24
+// Перевести текст вида border-left-width в borderLeftWidth
+// Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString».
+// То есть, дефисы удаляются, а все слова после них получают заглавную букву.
+// Например:
+// camelize("background-color") == 'backgroundColor';
+// camelize("list-style-image") == 'listStyleImage';
+// camelize("-webkit-transition") == 'WebkitTransition';
+// Такая функция полезна при работе с CSS.
+// P.S. Вам пригодятся методы строк charAt, split и toUpperCase.
+
+// function camelize(str) {
+//   var arr = str.split("-");
+//   for (var i = 1; i < arr.length; i++) {
+//     arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
+//   }
+//   return str = arr.join("");
+// }
+// console.log(camelize("background-color"));
+// console.log(camelize("list-style-image"));
+// console.log(camelize("-webkit-transition"));
+
+// Exercise 24
+// Функция removeClass
+// У объекта есть свойство className, которое хранит список «классов» – слов, разделенных пробелами:
+// var obj = {
+//   className: 'open menu'
+// };
+// Напишите функцию removeClass(obj, cls), которая удаляет класс cls, если он есть:
+// removeClass(obj, 'open'); // obj.className='menu'
+// removeClass(obj, 'blabla'); // без изменений (нет такого класса)
+// P.S. Дополнительное усложнение. Функция должна корректно обрабатывать дублирование класса в строке:
+// obj = {
+//   className: 'my menu menu'
+// };
+// removeClass(obj, 'menu');
+// alert( obj.className ); // 'my'
+// Лишних пробелов после функции образовываться не должно.
+
+// function removeClass(obj, cls) {
+//   var arr = obj.className.split(" ");
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i] === cls) {
+//       arr.splice(i,1);
+//       i--;
+//     }
+//   }
+//   return obj.className = arr.join(" ");
+// }
+// var obj = {
+//   className: 'open menu menu'
+// };
+// removeClass(obj, 'menu');
+// console.log(obj.className);
+
+// Exercise 25
+// Фильтрация массива "на месте"
+// Создайте функцию filterRangeInPlace(arr, a, b), которая получает массив с числами arr и удаляет из него все числа вне диапазона a..b. То есть, проверка имеет вид a ≤ arr[i] ≤ b. Функция должна менять сам массив и ничего не возвращать.
+// Например:
+// arr = [5, 3, 8, 1];
+// filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
+// alert( arr ); // массив изменился: остались [3, 1]
+
+// function filterRangeInPlace(arr, a, b) {
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i] < a || arr[i] > b) {
+//       arr.splice(i,1);
+//       i--;
+//     }
+//   }
+// }
+// var arr = [5, 3, 8, 1];
+// filterRangeInPlace(arr, 1, 4);
+// console.log(arr);
+
+// Exercise 26
+// Сортировать в обратном порядке
+// Как отсортировать массив чисел в обратном порядке?
+// var arr = [5, 2, 1, -10, 8];
+// // отсортируйте?
+// alert( arr ); // 8, 5, 2, 1, -10
+
+// var arr = [5, 2, 1, -10, 8];
+// arr.sort(function (a,b) {
+//   return b-a;
+// });
+// console.log(arr);
+
+// Exercise 27
+// Скопировать и отсортировать массив
+// Есть массив строк arr. Создайте массив arrSorted – из тех же элементов, но отсортированный.
+// Исходный массив не должен меняться.
+// var arr = ["HTML", "JavaScript", "CSS"];
+// // ... ваш код ...
+// alert( arrSorted ); // CSS, HTML, JavaScript
+// alert( arr ); // HTML, JavaScript, CSS (без изменений)
+// Постарайтесь сделать код как можно короче.
+
+// var arr = ["HTML", "JavaScript", "CSS"], arrSorted;
+// arrSorted = arr.concat().sort();
+// console.log(arrSorted);
+
+// Exercise 28
+// Случайный порядок в массиве
+// Используйте функцию sort для того, чтобы «перетрясти» элементы массива в случайном порядке.
+// var arr = [1, 2, 3, 4, 5];
+// arr.sort(ваша функция);
+// alert( arr ); // элементы в случайном порядке, например [3,5,1,2,4]
+
+// var arr = [1, 2, 3, 4, 5];
+// arr.sort(function (a,b) {
+//   return Math.random(a)-Math.random(b);
+// });
+// console.log(arr);
+
+// Exercise 29
+// Сортировка объектов
+// Напишите код, который отсортирует массив объектов people по полю age.
+// Например:
+// var vasya = { name: "Вася", age: 23 };
+// var masha = { name: "Маша", age: 18 };
+// var vovochka = { name: "Вовочка", age: 6 };
+// var people = [ vasya , masha , vovochka ];
+// ... ваш код ...
+// // теперь people: [vovochka, masha, vasya]
+// alert(people[0].age) // 6
+// Выведите список имён в массиве после сортировки.
+
+// var vasya = { name: "Вася", age: 23 };
+// var masha = { name: "Маша", age: 18 };
+// var vovochka = { name: "Вовочка", age: 6 };
+// var people = [ vasya , masha , vovochka ];
+// people.sort(function (person1, person2) {
+//   return person1.age - person2.age;
+// })
+// console.log(people);
